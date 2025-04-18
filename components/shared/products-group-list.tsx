@@ -1,9 +1,10 @@
-'use client'
-import React, {useEffect} from 'react';
+'use client';
+import React, { useEffect } from 'react';
 import { Title } from '@/components/shared/title';
 import { ProductCard } from '@/components/shared/product-card';
 import { cn } from '@/lib/utils';
-import {useIntersection} from "react-use";
+import { useIntersection } from 'react-use';
+import { useCategoryStore } from '@/store/category';
 
 type Props = {
   title: string;
@@ -20,15 +21,16 @@ export const ProductsGroupList: React.FC<Props> = ({
   categoryId,
   className,
 }) => {
+  const setActiveCategory = useCategoryStore((state) => state.setActiveId);
 
   const intersectionRef = React.useRef(null);
   const intersection = useIntersection(intersectionRef, {
-    threshold: 0.4
+    threshold: 0.4,
   });
 
   useEffect(() => {
     if (intersection?.isIntersecting) {
-      console.log(categoryId, title)
+      setActiveCategory(categoryId);
     }
   }, [intersection?.isIntersecting]);
 
