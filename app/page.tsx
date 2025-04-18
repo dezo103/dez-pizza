@@ -97,7 +97,7 @@ export default function Home() {
 
               <ProductsGroupList
                 title={'Завтраки'}
-                categoryId={1}
+                categoryId={2}
                 items={[
                   {
                     id: 1,
