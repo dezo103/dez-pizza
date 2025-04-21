@@ -32,7 +32,7 @@ export const Categories: React.FC<Props> = ({ className }) => {
           )}
           href={`/#${name}`}
         >
-          <button>{name}</button>
+          <button className={'cursor-pointer'}>{name}</button>
         </a>
       ))}
     </div>
