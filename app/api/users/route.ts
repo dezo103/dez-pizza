@@ -1,7 +1,8 @@
+import { prisma } from '@/prisma/prisma-client';
 import { NextResponse } from 'next/server';
 
-export function GET() {
-  return NextResponse.json({
-    uses: [1, 2, 3, 4],
-  });
+export async function GET() {
+  const users = await prisma.user.findMany();
+
+  return NextResponse.json(users);
 }
