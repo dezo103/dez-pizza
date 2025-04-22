@@ -9,9 +9,17 @@ datasource db {
 
 model User {
   id        Int      @id @default(autoincrement())
-  email     String
+  email     String   @unique
   fullName  String
   password  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Category {
+  id        Int      @id @default(autoincrement())
+  name      String   @unique
+  products  Product[]
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
@@ -20,6 +28,28 @@ model Product {
   id        Int      @id @default(autoincrement())
   name      String
   imageUrl  String
+  ingredients Ingredient[]
+  items      ProductItem[]
+  category  Category @relation(fields: [categoryId], references: [id])
+  categoryId Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model ProductItem { //вариации пицц
+  id        Int      @id @default(autoincrement())
+  price     Int
+  size      Int?
+  pizzaType Int? // тип тесто
+  product   Product @relation(fields: [productId], references: [id])
+}
+
+model Ingredient {
+  id        Int      @id @default(autoincrement())
+  name      String
+  price     String
+  imageUrl  String
+  products  Product[]
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
