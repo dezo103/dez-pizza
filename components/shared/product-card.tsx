@@ -19,7 +19,7 @@ export const ProductCard: React.FC<Props> = ({
   name,
   price,
   imageUrl,
-  ingredients,
+  // ingredients,
   className,
 }) => {
   return (
