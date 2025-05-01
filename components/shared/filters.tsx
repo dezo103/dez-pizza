@@ -53,7 +53,7 @@ export const Filters: React.FC<Props> = ({ className }) => {
         limit={6}
         defaultItems={items.slice(0, 6)}
         items={items}
-        // loading={loading}
+        loading={true}
         // onClickCheckbox={filters.setSelectedIngredients}
         // selected={filters.selectedIngredients}
       />

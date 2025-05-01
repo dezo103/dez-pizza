@@ -29,9 +29,9 @@ export const CheckboxFiltersGroup: React.FC<Props> = ({
   limit = 5,
   searchInputPlaceholder = 'Поиск...',
   className,
-  onChange,
-  defaultValue,
-  // loading,
+  //onChange,
+  //defaultValue,
+  loading,
   // onClickCheckbox,
   // selected,
   // name,
@@ -42,6 +42,20 @@ export const CheckboxFiltersGroup: React.FC<Props> = ({
   const onChangeSearchInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchValue(e.target.value);
   };
+
+  if (loading) {
+    return (
+      <div className={className}>
+        <p className="font-bold mb-3">{title}</p>
+
+        {...Array(limit)
+          .fill(0)
+          .map((_, index) => <Skeleton key={index} className="h-6 mb-4 rounded-[8px]" />)}
+
+        <Skeleton className="w-28 h-6 mb-4 rounded-[8px]" />
+      </div>
+    );
+  }
 
   const list = showAll
     ? items.filter((item) => item.text.toLowerCase().includes(searchValue.toLocaleLowerCase()))
@@ -85,19 +99,4 @@ export const CheckboxFiltersGroup: React.FC<Props> = ({
       )}
     </div>
   );
-
-  // if (loading) {
-  //   return (
-  //     <div className={className}>
-  //       <p className="font-bold mb-3">{title}</p>
-  //
-  //       {...Array(limit)
-  //         .fill(0)
-  //         .map((_, index) => <Skeleton key={index} className="h-6 mb-4 rounded-[8px]" />)}
-  //
-  //       <Skeleton className="w-28 h-6 mb-4 rounded-[8px]" />
-  //     </div>
-  //   );
-  // }
-  //
 };
