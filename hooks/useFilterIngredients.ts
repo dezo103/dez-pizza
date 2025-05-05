@@ -17,7 +17,7 @@ export const UseFilterIngredients = (): ReturnProps => {
   const [loading, setLoading] = useState(true);
 
   const [selectedIds, { toggle }] = useSet(new Set<string>([]));
-  console.log(selectedIds, 'selectedids');
+
   useEffect(() => {
     async function fetchIngredients() {
       try {
