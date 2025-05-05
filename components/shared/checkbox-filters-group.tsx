@@ -4,7 +4,6 @@ import React from 'react';
 import { FilterCheckboxProps, FilterCheckbox } from './filter-checkbox';
 import { Input } from '../ui/input';
 import { Skeleton } from '../ui';
-import { it } from 'node:test';
 
 type Item = FilterCheckboxProps;
 
@@ -18,7 +17,7 @@ interface Props {
   onClickCheckbox: (id: string) => void;
   onChange?: (values: string[]) => void;
   defaultValue?: string[];
-  // selected?: Set<string>;
+  selectedIds?: Set<string>;
   className?: string;
   // name?: string;
 }
@@ -34,7 +33,7 @@ export const CheckboxFiltersGroup: React.FC<Props> = ({
   //defaultValue,
   loading,
   onClickCheckbox,
-  // selected,
+  selectedIds,
   // name,
 }) => {
   const [showAll, setShowAll] = React.useState(false);
@@ -82,8 +81,7 @@ export const CheckboxFiltersGroup: React.FC<Props> = ({
             text={item.text}
             value={item.value}
             endAdornment={item.endAdornment}
-            // checked={selected?.has(item.value)}
-            checked={false}
+            checked={selectedIds?.has(item.value)}
             // onCheckedChange={() => onClickCheckbox?.(item.value)}
             onCheckedChange={() => onClickCheckbox(item.value)}
             // name={name}
