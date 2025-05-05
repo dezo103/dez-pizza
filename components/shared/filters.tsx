@@ -13,7 +13,7 @@ type Props = {
 };
 
 export const Filters: React.FC<Props> = ({ className }) => {
-  const { ingredients, loading } = UseFilterIngredients();
+  const { ingredients, loading, onAddId, selectedIds } = UseFilterIngredients();
 
   const items = ingredients.map((item) => ({ text: item.name, value: String(item.id) }));
 
@@ -54,7 +54,7 @@ export const Filters: React.FC<Props> = ({ className }) => {
         defaultItems={items.slice(0, 6)}
         items={items}
         loading={loading}
-        // onClickCheckbox={filters.setSelectedIngredients}
+        onClickCheckbox={onAddId}
         // selected={filters.selectedIngredients}
       />
     </div>

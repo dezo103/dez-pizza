@@ -3,16 +3,21 @@
 import { useEffect, useState } from 'react';
 import { Ingredient } from '@prisma/client';
 import { Api } from '@/services/api-client';
+import { useSet } from 'react-use';
 
-type ReturnProps = {
+interface ReturnProps {
   ingredients: Ingredient[];
   loading: boolean;
-};
+  selectedIds: Set<string>;
+  onAddId: (id: string) => void;
+}
 
 export const UseFilterIngredients = (): ReturnProps => {
   const [ingredients, setIngredients] = useState<Ingredient[]>([]);
   const [loading, setLoading] = useState(true);
 
+  const [selectedIds, { toggle }] = useSet(new Set<string>([]));
+  console.log(selectedIds, 'selectedids');
   useEffect(() => {
     async function fetchIngredients() {
       try {
@@ -28,5 +33,5 @@ export const UseFilterIngredients = (): ReturnProps => {
     fetchIngredients();
   }, []);
 
-  return { ingredients, loading };
+  return { ingredients, loading, selectedIds, onAddId: toggle };
 };
